@@ -46,13 +46,14 @@ fig, ax = plt.subplots()
 df['weekday'].value_counts().plot(kind='bar', ax=ax)
 st.pyplot(fig)
 
-# Voorbeeld: Staafdiagram van ongevalsoorzaken
-plt.figure(figsize=(10, 6))
-sns.countplot(x='accident_cause', data=df, order=df['accident_cause'].value_counts().index)
-plt.xticks(rotation=90)
-plt.xlabel('Oorzaak van het Ongeval')
-plt.ylabel('Aantal Ongevallen')
-plt.title('Staafdiagram van Ongevalsoorzaken')
-plt.show()
-
 # Add more visualizations and interactivity...
+
+# Voorbeeld: Tijdreeksgrafiek van ongevallen per maand
+df['date'] = pd.to_datetime(df['date'])
+df['month'] = df['date'].dt.month
+monthly_accidents = df.groupby('month')['ID'].count()
+sns.lineplot(x=monthly_accidents.index, y=monthly_accidents.values)
+plt.xlabel('Maand')
+plt.ylabel('Aantal Ongevallen')
+plt.title('Tijdreeksgrafiek van Ongevallen per Maand')
+plt.show()
