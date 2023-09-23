@@ -1,0 +1,12 @@
+# Count the occurrences of each accident type
+accident_type_counts = df['accident_type'].value_counts().reset_index()
+accident_type_counts.columns = ['accident_type', 'count']
+
+# Create a pie chart using Plotly
+fig = px.pie(accident_type_counts, 
+             names='accident_type', 
+             values='count',
+             title='Distribution of Accident Types')
+
+# Show the pie chart
+fig.show()
