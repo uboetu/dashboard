@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 # Load the data
 @st.cache
 def load_data():
-    data = pd.read_csv(r"C:\Users\boetr\Desktop\Programeren\brazil traffic\Dados_PRF_2022_translated.csv", delimiter=';')
+    data = pd.read_csv("Dados_PRF_2022_translated.csv", delimiter=';')
     return data
 
 df = load_data()
