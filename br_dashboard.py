@@ -7,6 +7,11 @@ import plotly.graph_objects as go
 @st.cache
 def load_data():
     data = pd.read_csv("Dados_PRF_2022_translated.csv", delimiter=';')
+    
+    # Convert latitude and longitude to float data type
+    data['latitude'] = data['latitude'].str.replace(',', '.').astype(float)
+    data['longitude'] = data['longitude'].str.replace(',', '.').astype(float)
+    
     return data
 
 df = load_data()
