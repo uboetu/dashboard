@@ -2,19 +2,19 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import plotly.graph_objects as go
+import plotly.express as px
+
 
 # Load the data
 @st.cache
 def load_data():
     data = pd.read_csv("Dados_PRF_2022_translated.csv", delimiter=';')
-    
-    # Convert latitude and longitude to float data type
-    data['latitude'] = data['latitude'].str.replace(',', '.').astype(float)
-    data['longitude'] = data['longitude'].str.replace(',', '.').astype(float)
-    
     return data
 
 df = load_data()
+
+df['longitude'] = df['longitude'].str.replace(',', '.').astype(float)
+df['latitude'] = df['latitude'].str.replace(',', '.').astype(float)
 
 # Title and introduction
 st.title("Brazil Traffic Data Dashboard for 2022")
@@ -57,6 +57,19 @@ st.pyplot(fig)
 unique_accident_types = df['accident_type'].unique()
 accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
 df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
+
+# Count the occurrences of each accident type
+accident_type_counts = df['accident_type'].value_counts().reset_index()
+accident_type_counts.columns = ['accident_type', 'count']
+
+# Create a pie chart using Plotly
+fig = px.pie(accident_type_counts, 
+             names='accident_type', 
+             values='count',
+             title='Distribution of Accident Types')
+
+# Show the pie chart in Streamlit
+st.plotly_chart(fig)
 
 # Create a Mapbox scatter plot with markers colored based on mapped accident type values
 fig99 = go.Figure(go.Scattermapbox(
