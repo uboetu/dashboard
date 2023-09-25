@@ -13,9 +13,6 @@ def load_data():
 
 df = load_data()
 
-df['longitude'] = df['longitude'].str.replace(',', '.').astype(float)
-df['latitude'] = df['latitude'].str.replace(',', '.').astype(float)
-
 # Title and introduction
 st.title("Brazil Traffic Data Dashboard for 2022")
 st.write("This dashboard provides insights into the traffic data of Brazil for the year 2022.")
