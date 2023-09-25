@@ -205,6 +205,8 @@ translations = {
 def translate_dataframe(df, translation_dict):
     """Load the CSV file from the given path, translate its columns, and return the translated dataframe."""
     df_translated = df.rename(columns=translation_dict)
+    df_translated = df_translated['longitude'] = df_translated['longitude'].str.replace(',', '.').astype(float)
+    df_translated = df_translated['latitude'] = df_translated['latitude'].str.replace(',', '.').astype(float) 
     return df_translated
 
 def translate_values(df, translations):
@@ -218,6 +220,7 @@ for year in range(2017, 2024):
     try:
         df_year = pd.read_csv(file_path, encoding='ISO-8859-1', delimiter=';')
         df_year = df_year.drop_duplicates()
+
         dfs.append(df_year)
         
         # Translate column names
@@ -225,7 +228,7 @@ for year in range(2017, 2024):
         
         # Translate specific values
         df_translated = translate_values(df_translated, translations)
-        
+       
         # Save translated CSV
         output_file_name = os.path.join(script_dir, "Dados_PRF_" + str(year) + "_translated.csv")
         df_translated.to_csv(output_file_name, index=False, encoding='utf-8', sep=';')
