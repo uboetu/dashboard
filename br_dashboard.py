@@ -148,32 +148,23 @@ for opt in plot_options:
     st.subheader(title_map[opt])
     plot_categorical_distribution(df, opt, title_map[opt])
 
-
-# Map visualization using Plotly
-# Map the accident types to numeric values
-unique_accident_types = df['accident_type'].unique()
-accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
-df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
-
-
-# Create a Mapbox scatter plot with markers colored based on mapped accident type values
 fig99 = go.Figure(go.Scattermapbox(
-        lat=df['latitude'],
-        lon=df['longitude'],
+        lat=df_week['latitude'],
+        lon=df_week['longitude'],
         mode='markers',
         marker=go.scattermapbox.Marker(
             size=5,
-            color=df['accident_type_numeric'],
-            colorscale='Jet',
+            color=df_week['accident_type_numeric'],
+            colorscale='Viridis',
             showscale=True,
             colorbar=dict(tickvals=list(accident_type_mapping.values()), 
                           ticktext=list(accident_type_mapping.keys()))
         ),
-        text=df['city'] + '<br>' + df['accident_type'],
+        text=df_week['city'] + '<br>' + df_week['accident_type'],
     ))
 
 fig99.update_layout(
-    title='Accidents in Brazil Based on Latitude and Longitude (Colored by Accident Type)',
+    title=f'Accidents in Brazil for Week {selected_week} Based on Latitude and Longitude (Colored by Accident Type)',
     autosize=True,
     hovermode='closest',
     showlegend=False,
@@ -185,7 +176,7 @@ fig99.update_layout(
             lon=-55
         ),
         pitch=0,
-        zoom=3,
+        zoom=2,
         style='open-street-map'
     ),
 )
