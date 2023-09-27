@@ -46,9 +46,6 @@ def load_data(year):
     data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
     return data
 
-# Title of the dashboard
-st.title("Accident Data Brazil 2017-2022")
-
 st.markdown(
     """
     ## Translation of Dataset
@@ -58,6 +55,10 @@ st.markdown(
     [Translation Script](https://github.com/uboetu/dashboard/blob/main/br_traffic_v2_translated_adaptable_modified.py)
     """
 )
+
+# Title of the dashboard
+st.title("Accident Data Brazil 2017-2022")
+
 
 # Selector for year
 selected_year = st.sidebar.selectbox("Choose a Year", list(dataset_paths.keys()))
