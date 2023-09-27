@@ -5,7 +5,9 @@ import seaborn as sns
 
 # Load the dataset
 @st.cache
-def load_data(year):
+def load_data(year="2022"):  # default year set to 2022
+    if year not in dataset_paths:
+        raise KeyError("The specified year does not exist in dataset paths.")
     data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
     # Attempt to convert the 'date' column to datetime
     try:
@@ -71,7 +73,7 @@ dataset_paths = {
     '2022': 'Dados_PRF_2022_translated.csv',
 }
 
-def load_data(year):
+def load_data(year="2022"):  # default year set to 2022
     data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
     return data
 
