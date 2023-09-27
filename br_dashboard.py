@@ -25,42 +25,34 @@ if analysis == "Original Dataset Info":
     st.write("Delimiter used: ;")
     st.write("Encoding used: latin1")
     
-    # Displaying columns in a nicer way
+    # Displaying columns in a more horizontal way
     st.write("Columns in the dataset:")
     columns = df.columns.tolist()
-    for i, col in enumerate(columns):
-        st.markdown(f"{i}: `{col}`")
+    col1, col2, col3 = st.columns(3)  # create three columns
+    for i in range(0, len(columns), 3):
+        col1.write(f"{i}: `{columns[i]}`")
+        if i + 1 < len(columns):
+            col2.write(f"{i + 1}: `{columns[i + 1]}`")
+        if i + 2 < len(columns):
+            col3.write(f"{i + 2}: `{columns[i + 2]}`")
     
     st.write("Sample data from the original dataset:")
     st.write(df.head())
+if analysis == "Original Dataset Info":
+    st.subheader("Original Dataset Information")
+    st.write("Delimiter used: ;")
+    st.write("Encoding used: latin1")
     
-elif analysis == "Time Analysis":
-    # Accidents by day of the week
-    st.subheader("Accidents by Day of the Week")
-    fig, ax = plt.subplots()
-    sns.countplot(data=df, y='dia_semana', ax=ax, order=df['dia_semana'].value_counts().index)
-    st.pyplot(fig)
+    # Displaying columns in a more horizontal way
+    st.write("Columns in the dataset:")
+    columns = df.columns.tolist()
+    col1, col2, col3 = st.columns(3)  # create three columns
+    for i in range(0, len(columns), 3):
+        col1.write(f"{i}: `{columns[i]}`")
+        if i + 1 < len(columns):
+            col2.write(f"{i + 1}: `{columns[i + 1]}`")
+        if i + 2 < len(columns):
+            col3.write(f"{i + 2}: `{columns[i + 2]}`")
     
-    # Accidents by time of the day
-    st.subheader("Accidents by Time of the Day")
-    df['horario'] = pd.to_datetime(df['horario'])
-    df['hour'] = df['horario'].dt.hour
-    fig, ax = plt.subplots()
-    sns.histplot(data=df, x='hour', bins=24, ax=ax)
-    st.pyplot(fig)
-
-elif analysis == "Location Analysis":
-    # Accidents by federal unit
-    st.subheader("Accidents by Federal Unit")
-    fig, ax = plt.subplots()
-    sns.countplot(data=df, y='uf', ax=ax, order=df['uf'].value_counts().index)
-    st.pyplot(fig)
-
-elif analysis == "Accident Details":
-    # Distribution of the cause of accident
-    st.subheader("Distribution of Cause of Accident")
-    fig, ax = plt.subplots()
-    sns.countplot(data=df, y='causa_acidente', ax=ax, order=df['causa_acidente'].value_counts().index)
-    st.pyplot(fig)
-
-
+    st.write("Sample data from the original dataset:")
+    st.write(df.head())
