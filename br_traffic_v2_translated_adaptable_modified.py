@@ -232,11 +232,12 @@ for year in range(2017, 2024):
     try:
         df_year = pd.read_csv(file_path, encoding='ISO-8859-1', delimiter=';')
         df_year = df_year.drop_duplicates()
-        dfs.append(df_year)
         
         # Translate column names
         df_translated = translate_dataframe(df_year, translation_dict)
-        df_translated = convert_coords(df_year)
+        
+        # Convert coordinates
+        df_translated = convert_coords(df_translated)
         
         # Translate specific values
         df_translated = translate_values(df_translated, translations)
