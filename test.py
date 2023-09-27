@@ -1,7 +1,6 @@
 import streamlit as st
 import pandas as pd
 import plotly.graph_objects as go
-import time
 
 # Load the data
 @st.cache
@@ -21,34 +20,26 @@ st.write("This dashboard provides insights into the traffic data of Brazil for t
 
 # Week Slider
 selected_week = st.slider('Select a week', 0, 52, 0)  # weeks from 0 to 52
-df_week = df[df['week'] == str(selected_week).zfill(2)]  # filter data for the selected week
-
-# Play Button
-if st.button('Play Animation'):
-    for week in range(selected_week, 53):
-        st.slider('Select a week', 0, 52, week)
-        df_week = df[df['week'] == str(week).zfill(2)]
-        time.sleep(1)  # sleep for 1 second before showing the next week
-        st.experimental_rerun()  # rerun the script to update the slider and map
+df = df[df['week'] == str(selected_week).zfill(2)]  # filter data for the selected week
 
 # Map visualization using Plotly
-unique_accident_types = df_week['accident_type'].unique()
+unique_accident_types = df['accident_type'].unique()
 accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
-df_week['accident_type_numeric'] = df_week['accident_type'].map(accident_type_mapping)
+df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
 
 fig99 = go.Figure(go.Scattermapbox(
-        lat=df_week['latitude'],
-        lon=df_week['longitude'],
+        lat=df['latitude'],
+        lon=df['longitude'],
         mode='markers',
         marker=go.scattermapbox.Marker(
             size=5,
-            color=df_week['accident_type_numeric'],
+            color=df['accident_type_numeric'],
             colorscale='Viridis',
             showscale=True,
             colorbar=dict(tickvals=list(accident_type_mapping.values()), 
                           ticktext=list(accident_type_mapping.keys()))
         ),
-        text=df_week['city'] + '<br>' + df_week['accident_type'],
+        text=df['city'] + '<br>' + df['accident_type'],
     ))
 
 fig99.update_layout(
