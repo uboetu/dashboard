@@ -210,8 +210,8 @@ translations = {
         'Retorno Regulamentado': 'Regulated Return'
     },
     "urban_rural": {
-        'Sim': 'Yes',
-        'Não': 'No'
+        'Sim': 'Urban',
+        'Não': 'Rural'
     }
 }
 
