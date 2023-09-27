@@ -148,37 +148,42 @@ for opt in plot_options:
     st.subheader(title_map[opt])
     plot_categorical_distribution(df, opt, title_map[opt])
 
-fig99 = go.Figure(go.Scattermapbox(
-        lat=df_week['latitude'],
-        lon=df_week['longitude'],
-        mode='markers',
-        marker=go.scattermapbox.Marker(
-            size=5,
-            color=df_week['accident_type_numeric'],
-            colorscale='Viridis',
-            showscale=True,
-            colorbar=dict(tickvals=list(accident_type_mapping.values()), 
-                          ticktext=list(accident_type_mapping.keys()))
-        ),
-        text=df_week['city'] + '<br>' + df_week['accident_type'],
-    ))
+# For fig99 plot
+# Ensure the necessary columns are present in the dataframe
+if all(col in df.columns for col in ['latitude', 'longitude', 'accident_type', 'city']):
+    fig99 = go.Figure(go.Scattermapbox(
+            lat=df['latitude'],
+            lon=df['longitude'],
+            mode='markers',
+            marker=go.scattermapbox.Marker(
+                size=5,
+                color=df['accident_type_numeric'],
+                colorscale='Viridis',
+                showscale=True,
+                colorbar=dict(tickvals=list(accident_type_mapping.values()), 
+                              ticktext=list(accident_type_mapping.keys()))
+            ),
+            text=df['city'] + '<br>' + df['accident_type'],
+        ))
 
-fig99.update_layout(
-    title=f'Accidents in Brazil for Week {selected_week} Based on Latitude and Longitude (Colored by Accident Type)',
-    autosize=True,
-    hovermode='closest',
-    showlegend=False,
-    mapbox=go.layout.Mapbox(
-        accesstoken=None,
-        bearing=0,
-        center=go.layout.mapbox.Center(
-            lat=-10,
-            lon=-55
+    fig99.update_layout(
+        title=f'Accidents in Brazil for Year {selected_year} Based on Latitude and Longitude (Colored by Accident Type)',
+        autosize=True,
+        hovermode='closest',
+        showlegend=False,
+        mapbox=go.layout.Mapbox(
+            accesstoken=None,
+            bearing=0,
+            center=go.layout.mapbox.Center(
+                lat=-10,
+                lon=-55
+            ),
+            pitch=0,
+            zoom=2,
+            style='open-street-map'
         ),
-        pitch=0,
-        zoom=2,
-        style='open-street-map'
-    ),
-)
+    )
 
-st.plotly_chart(fig99)
+    st.plotly_chart(fig99)
+else:
+    st.warning("The necessary columns for plotting (latitude, longitude, accident_type, city) are not all present in the selected dataset.")
