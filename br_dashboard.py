@@ -94,10 +94,6 @@ df = load_data(selected_year)
 df['year'] = df['date'].dt.year
 df['month'] = df['date'].dt.month
 
-# Filtering the dataframe based on the selected date range
-df = df[(df['year'] >= start_year) & (df['year'] <= end_year) & 
-        (df['month'] >= start_month) & (df['month'] <= end_month)]
-
 # Displaying the year and the first few rows of the selected dataset
 st.write(f"Selected Dataset Year: {selected_year}")
 st.write("Sample data from the selected dataset:")
