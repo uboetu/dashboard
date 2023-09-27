@@ -68,10 +68,6 @@ df = load_data(selected_year)
 st.write(f"Selected Dataset Year: {selected_year}")
 st.write("Sample data from the selected dataset:")
 st.write(df.head())
-# After loading the data and displaying the head of the dataframe
-st.write(f"Selected Dataset Year: {selected_year}")
-st.write("Sample data from the selected dataset:")
-st.write(df.head())
 
 # Display basic information about the dataset
 st.write("### Dataset Information:")
