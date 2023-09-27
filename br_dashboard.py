@@ -20,7 +20,7 @@ st.markdown(
     The original, untranslated datasets were sourced from Kaggle, from a collection of Police Traffic Incidents 
     datasets provided by the user tgomesjuliana. We opted for this particular dataset because of its substantial 
     file size compared to others, offering a more extensive and comprehensive dataset for analysis.
-    You can access the original dataset [here](https://www.kaggle.com/datasets/tgomesjuliana/police-traffic-incidents).
+    You can access the original datasets [here](https://www.kaggle.com/datasets/tgomesjuliana/police-traffic-incidents).
     """
 )    
 
@@ -82,9 +82,15 @@ st.write(df.head())
 st.write("### Dataset Information:")
 st.write(f"Number of Rows: {df.shape[0]}")
 st.write(f"Number of Columns: {df.shape[1]}")
-st.write("Statistical Summary:")
-st.write(df.describe(include='all'))  # Using include='all' to describe all columns
-
+st.write("Translated column names in the dataset:")
+columns = df.columns.tolist()
+col1, col2, col3 = st.columns(3)  # create three columns
+for i in range(0, len(columns), 3):
+    col1.write(f"{i}: `{columns[i]}`")
+    if i + 1 < len(columns):
+        col2.write(f"{i + 1}: `{columns[i + 1]}`")
+    if i + 2 < len(columns):
+        col3.write(f"{i + 2}: `{columns[i + 2]}`")
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
