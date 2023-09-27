@@ -66,10 +66,8 @@ st.write(df.head())
 st.write("### Dataset Information:")
 st.write(f"Number of Rows: {df.shape[0]}")
 st.write(f"Number of Columns: {df.shape[1]}")
-st.write("Column Names:")
-st.write(list(df.columns))
-st.write("Column Data Types and Non-Null Counts:")
-st.write(df.info())
+st.write("Statistical Summary:")
+st.write(df.describe(include='all'))  # Using include='all' to describe all columns
 
 
 # EDA Plots
