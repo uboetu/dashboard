@@ -18,7 +18,14 @@ def load_data(year="2022"):  # default year set to 2022
         st.warning(f"Error processing date column: {e}. Skipping date conversion.")
     return data
 
-
+dataset_paths = {
+    '2017': 'Dados_PRF_2017_translated.csv',
+    '2018': 'Dados_PRF_2018_translated.csv',
+    '2019': 'Dados_PRF_2019_translated.csv',
+    '2020': 'Dados_PRF_2020_translated.csv',
+    '2021': 'Dados_PRF_2021_translated.csv',
+    '2022': 'Dados_PRF_2022_translated.csv',
+}
 # Load the data
 df = load_data()
 
@@ -63,15 +70,6 @@ for i in range(0, len(columns), 3):
 
 st.write("Sample data from the original dataset:")
 st.write(df.head())
-
-dataset_paths = {
-    '2017': 'Dados_PRF_2017_translated.csv',
-    '2018': 'Dados_PRF_2018_translated.csv',
-    '2019': 'Dados_PRF_2019_translated.csv',
-    '2020': 'Dados_PRF_2020_translated.csv',
-    '2021': 'Dados_PRF_2021_translated.csv',
-    '2022': 'Dados_PRF_2022_translated.csv',
-}
 
 def load_data(year="2022"):  # default year set to 2022
     data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
