@@ -227,6 +227,18 @@ def translate_values(df, translations):
             df[column] = df[column].map(mapping)
     return df
 
+def convert_datetime(df):
+    """
+    Converts the date and time columns to datetime objects.
+    """
+    if 'date' in df.columns:
+        df['date'] = pd.to_datetime(df['date'], errors='coerce', dayfirst=True)
+    if 'time' in df.columns:
+        # Concatenating date and time for better datetime representation
+        df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'], errors='coerce')
+        df = df.drop(columns=['time'])  # dropping the 'time' column after creating 'datetime'
+    return df
+
 for year in range(2017, 2024):
     file_path = file_path_template.format(year)
     try:
@@ -238,6 +250,9 @@ for year in range(2017, 2024):
         
         # Convert coordinates
         df_translated = convert_coords(df_translated)
+
+        # Convert date and time to datetime objects
+        df_translated = convert_datetime(df_translated)
         
         # Translate specific values
         df_translated = translate_values(df_translated, translations)
