@@ -158,7 +158,15 @@ unique_accident_types = df['accident_type'].unique()
 accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
 df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
 
-# Create a Mapbox scatter plot with markers colored based on mapped accident type values
+# Calculate the week number
+df['week_number'] = df['date'].dt.isocalendar().week  # use isocalendar().week to get the week number
+
+# Slider for selecting the week number
+selected_week = st.slider('Select the Week Number', 1, 52, 1)
+
+# Filtering the dataframe based on the selected week number
+df = df[df['week_number'] == selected_week]
+
 fig99 = go.Figure(go.Scattermapbox(
         lat=df['latitude'],
         lon=df['longitude'],
