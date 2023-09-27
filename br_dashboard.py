@@ -171,6 +171,9 @@ selected_week = st.slider('Select the Week Number', 1, 52, 1)
 # Filtering the dataframe based on the selected week number
 df_week = df[df['week_number'] == selected_week]
 
+df_week = df_week[(df_week['latitude'] >= -33) & (df_week['latitude'] <= 5) & 
+                  (df_week['longitude'] >= -74) & (df_week['longitude'] <= -34)]
+
 fig99 = go.Figure(go.Scattermapbox(
         lat=df_week['latitude'],
         lon=df_week['longitude'],
