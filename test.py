@@ -3,7 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Load the data
-@st.cache
+@st.cache(allow_output_mutation=True)
 def load_data():
     data = pd.read_csv("Dados_PRF_2022_translated.csv", delimiter=';')
     return data
