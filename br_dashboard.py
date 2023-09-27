@@ -24,11 +24,16 @@ if analysis == "Original Dataset Info":
     st.subheader("Original Dataset Information")
     st.write("Delimiter used: ;")
     st.write("Encoding used: latin1")
+    
+    # Displaying columns in a nicer way
     st.write("Columns in the dataset:")
-    st.write(list(df.columns))
+    columns = df.columns.tolist()
+    for i, col in enumerate(columns):
+        st.markdown(f"{i}: `{col}`")
+    
     st.write("Sample data from the original dataset:")
     st.write(df.head())
-
+    
 elif analysis == "Time Analysis":
     # Accidents by day of the week
     st.subheader("Accidents by Day of the Week")
