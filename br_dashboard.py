@@ -60,11 +60,11 @@ st.write(df.head())
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
-    plt.figure(figsize=(10, 6))
-    sns.countplot(y=data[column], order=data[column].value_counts().index, palette='viridis')
-    plt.title(title, fontsize=15)
-    plt.ylabel('')
-    st.pyplot()  # Use st.pyplot() to display the plot in Streamlit
+    fig, ax = plt.subplots(figsize=(10, 6))  # Create a new figure and axis object
+    sns.countplot(y=data[column], order=data[column].value_counts().index, palette='viridis', ax=ax)
+    ax.set_title(title, fontsize=15)
+    ax.set_ylabel('')
+    st.pyplot(fig)  # Pass the figure object to st.pyplot()
     plt.clf()  # Clear the current figure
 
 
