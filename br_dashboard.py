@@ -16,7 +16,7 @@ st.title("Accident Data Brazil Dashboard")
 
 st.markdown(
     """
-    ## About the Original Untranslated Dataset
+    # About the Original Untranslated Dataset
     The original, untranslated datasets were sourced from Kaggle, from a collection of Police Traffic Incidents 
     datasets provided by the user tgomesjuliana. We opted for this particular dataset because of its substantial 
     file size compared to others, offering a more extensive and comprehensive dataset for analysis.
