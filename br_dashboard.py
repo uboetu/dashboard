@@ -12,14 +12,16 @@ def load_data():
 # Load the data
 df = load_data()
 
-# Convert the 'date' column to datetime, coerce errors
 # Attempt to convert the 'date' column to datetime and extract the year
 try:
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
+    # Make sure the conversion was successful and the column is not all NaT
+    if df['date'].isnull().all():
+        raise Exception("Date conversion failed.")
     df['year'] = df['date'].dt.year
-except KeyError:
-    st.warning("Date column not found in the DataFrame. Skipping date conversion and year extraction.")
-    
+except (KeyError, Exception) as e:
+    st.warning(f"Error processing date column: {e}. Skipping date conversion and year extraction.")
+
 # Title of the dashboard
 st.title("Accident Data Brazil Dashboard")
 
