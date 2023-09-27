@@ -49,6 +49,16 @@ def load_data(year):
 # Title of the dashboard
 st.title("Accident Data Brazil 2017-2022")
 
+st.markdown(
+    """
+    ## Translation of Dataset
+    The datasets used in this dashboard were originally in Portuguese. 
+    We have translated all the data to English to make the analysis more accessible to a global audience. 
+    The translation was done using a custom script, which can be found at the following GitHub link:
+    [Translation Script](https://github.com/uboetu/dashboard/blob/main/br_traffic_v2_translated_adaptable_modified.py)
+    """
+)
+
 # Selector for year
 selected_year = st.sidebar.selectbox("Choose a Year", list(dataset_paths.keys()))
 df = load_data(selected_year)
