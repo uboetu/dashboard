@@ -5,41 +5,21 @@ import seaborn as sns
 
 # Load the dataset
 @st.cache
-def load_data(year="2022"):  # default year set to 2022
-    if year not in dataset_paths:
-        raise KeyError("The specified year does not exist in dataset paths.")
-    data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
-    # Attempt to convert the 'date' column to datetime
-    try:
-        data['date'] = pd.to_datetime(data['date'], errors='coerce')
-        if data['date'].isnull().all():
-            raise Exception("Date conversion failed.")
-    except Exception as e:
-        st.warning(f"Error processing date column: {e}. Skipping date conversion.")
+def load_data():
+    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='latin1')
     return data
 
-dataset_paths = {
-    '2017': 'Dados_PRF_2017_translated.csv',
-    '2018': 'Dados_PRF_2018_translated.csv',
-    '2019': 'Dados_PRF_2019_translated.csv',
-    '2020': 'Dados_PRF_2020_translated.csv',
-    '2021': 'Dados_PRF_2021_translated.csv',
-    '2022': 'Dados_PRF_2022_translated.csv',
-}
 # Load the data
 df = load_data()
 
-# Attempt to convert the 'date' column to datetime and extract the year
+# Convert the 'date' column to datetime, coerce errors
 # Attempt to convert the 'date' column to datetime and extract the year
 try:
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
-    # Make sure the conversion was successful and the column is not all NaT
-    if df['date'].isnull().all():
-        raise Exception("Date conversion failed.")
     df['year'] = df['date'].dt.year
-except (KeyError, Exception) as e:
-    st.warning(f"Error processing date column: {e}. Skipping date conversion and year extraction.")
-
+except KeyError:
+    st.warning("Date column not found in the DataFrame. Skipping date conversion and year extraction.")
+    
 # Title of the dashboard
 st.title("Accident Data Brazil Dashboard")
 
@@ -71,8 +51,24 @@ for i in range(0, len(columns), 3):
 st.write("Sample data from the original dataset:")
 st.write(df.head())
 
-def load_data(year="2022"):  # default year set to 2022
+dataset_paths = {
+    '2017': 'Dados_PRF_2017_translated.csv',
+    '2018': 'Dados_PRF_2018_translated.csv',
+    '2019': 'Dados_PRF_2019_translated.csv',
+    '2020': 'Dados_PRF_2020_translated.csv',
+    '2021': 'Dados_PRF_2021_translated.csv',
+    '2022': 'Dados_PRF_2022_translated.csv',
+}
+
+def load_data(year):
     data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
+    # Attempt to convert the 'date' column to datetime
+    try:
+        data['date'] = pd.to_datetime(data['date'], errors='coerce')
+        if data['date'].isnull().all():
+            raise Exception("Date conversion failed.")
+    except Exception as e:
+        st.warning(f"Error processing date column: {e}. Skipping date conversion.")
     return data
 
 st.markdown(
@@ -157,42 +153,46 @@ for opt in plot_options:
     st.subheader(title_map[opt])
     plot_categorical_distribution(df, opt, title_map[opt])
 
-# For fig99 plot
-# Ensure the necessary columns are present in the dataframe
-if all(col in df.columns for col in ['latitude', 'longitude', 'accident_type', 'city']):
-    fig99 = go.Figure(go.Scattermapbox(
-            lat=df['latitude'],
-            lon=df['longitude'],
-            mode='markers',
-            marker=go.scattermapbox.Marker(
-                size=5,
-                color=df['accident_type_numeric'],
-                colorscale='Viridis',
-                showscale=True,
-                colorbar=dict(tickvals=list(accident_type_mapping.values()), 
-                              ticktext=list(accident_type_mapping.keys()))
-            ),
-            text=df['city'] + '<br>' + df['accident_type'],
-        ))
 
-    fig99.update_layout(
-        title=f'Accidents in Brazil for Year {selected_year} Based on Latitude and Longitude (Colored by Accident Type)',
-        autosize=True,
-        hovermode='closest',
-        showlegend=False,
-        mapbox=go.layout.Mapbox(
-            accesstoken=None,
-            bearing=0,
-            center=go.layout.mapbox.Center(
-                lat=-10,
-                lon=-55
-            ),
-            pitch=0,
-            zoom=2,
-            style='open-street-map'
+# Map visualization using Plotly
+# Map the accident types to numeric values
+unique_accident_types = df['accident_type'].unique()
+accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
+df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
+
+
+# Create a Mapbox scatter plot with markers colored based on mapped accident type values
+fig99 = go.Figure(go.Scattermapbox(
+        lat=df['latitude'],
+        lon=df['longitude'],
+        mode='markers',
+        marker=go.scattermapbox.Marker(
+            size=5,
+            color=df['accident_type_numeric'],
+            colorscale='Jet',
+            showscale=True,
+            colorbar=dict(tickvals=list(accident_type_mapping.values()), 
+                          ticktext=list(accident_type_mapping.keys()))
         ),
-    )
+        text=df['city'] + '<br>' + df['accident_type'],
+    ))
 
-    st.plotly_chart(fig99)
-else:
-    st.warning("The necessary columns for plotting (latitude, longitude, accident_type, city) are not all present in the selected dataset.")
+fig99.update_layout(
+    title='Accidents in Brazil Based on Latitude and Longitude (Colored by Accident Type)',
+    autosize=True,
+    hovermode='closest',
+    showlegend=False,
+    mapbox=go.layout.Mapbox(
+        accesstoken=None,
+        bearing=0,
+        center=go.layout.mapbox.Center(
+            lat=-10,
+            lon=-55
+        ),
+        pitch=0,
+        zoom=3,
+        style='open-street-map'
+    ),
+)
+
+st.plotly_chart(fig99)
