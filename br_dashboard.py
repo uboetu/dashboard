@@ -13,6 +13,7 @@ def load_data():
 df = load_data()
 
 # Attempt to convert the 'date' column to datetime and extract the year
+# Attempt to convert the 'date' column to datetime and extract the year
 try:
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     # Make sure the conversion was successful and the column is not all NaT
