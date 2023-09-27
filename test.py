@@ -55,9 +55,8 @@ fig99.update_layout(
             lon=-55
         ),
         pitch=0,
-        zoom=3,
+        zoom=2,
         style='open-street-map'
     ),
 )
 
-st.plotly_chart(fig99)
