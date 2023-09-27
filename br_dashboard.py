@@ -57,6 +57,20 @@ df = load_data(selected_year)
 st.write(f"Selected Dataset Year: {selected_year}")
 st.write("Sample data from the selected dataset:")
 st.write(df.head())
+# After loading the data and displaying the head of the dataframe
+st.write(f"Selected Dataset Year: {selected_year}")
+st.write("Sample data from the selected dataset:")
+st.write(df.head())
+
+# Display basic information about the dataset
+st.write("### Dataset Information:")
+st.write(f"Number of Rows: {df.shape[0]}")
+st.write(f"Number of Columns: {df.shape[1]}")
+st.write("Column Names:")
+st.write(list(df.columns))
+st.write("Column Data Types and Non-Null Counts:")
+st.write(df.info())
+
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
