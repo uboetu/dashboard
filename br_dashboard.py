@@ -12,7 +12,7 @@ def load_data():
 df = load_data()
 
 # Title of the dashboard
-st.title("Accident Data Dashboard")
+st.title("Accident Data Brazil Dashboard")
     
 
 st.subheader("Original Dataset Information")
@@ -47,7 +47,7 @@ def load_data(year):
     return data
 
 # Title of the dashboard
-st.title("Accident Data Dashboard")
+st.title("Accident Data Brazil 2017-2022")
 
 # Selector for year
 selected_year = st.sidebar.selectbox("Choose a Year", list(dataset_paths.keys()))
