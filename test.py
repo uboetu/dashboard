@@ -15,11 +15,13 @@ df = load_data().copy()
 df['date'] = pd.to_datetime(df['date'])
 df['week'] = df['date'].dt.strftime('%W')  # using %W to consider weeks starting from Monday
 
-# ...
+print(df['week'].unique()) 
 
 # Week Slider
 selected_week = st.slider('Select a week', 0, 52, 0, key='week_slider') # weeks from 0 to 52
 # Filter data for the selected week and make a copy
+print(type(df['week'].iloc[0]))  # print the data type of 'week' in df
+print(type(str(selected_week).zfill(2)))
 df_week = df[df['week'] == str(selected_week).zfill(2)]  # ensuring two-digit week number
 
 # Title and introduction
@@ -65,3 +67,9 @@ fig99.update_layout(
 )
 
 st.plotly_chart(fig99)
+
+
+# Print df_week to verify
+# Print a random sample of 10 rows from the 'date' and 'week' columns
+print(df[['date', 'week']].sample(25))
+

@@ -232,7 +232,7 @@ def convert_datetime(df):
     Converts the date and time columns to datetime objects.
     """
     if 'date' in df.columns:
-        df['date'] = pd.to_datetime(df['date'], errors='coerce', dayfirst=True)
+        df['date'] = pd.to_datetime(df['date'])
     if 'time' in df.columns:
         # Concatenating date and time for better datetime representation
         df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'], errors='coerce')
