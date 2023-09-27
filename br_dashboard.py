@@ -73,6 +73,17 @@ st.title("Accident Data Brazil 2017-2022")
 selected_year = st.sidebar.selectbox("Choose a Year", list(dataset_paths.keys()))
 df = load_data(selected_year)
 
+df['year'] = df['date'].dt.year
+df['month'] = df['date'].dt.month
+
+# Slider for selecting the date range
+start_year, end_year = st.slider('Select the Year Range', min(df['year']), max(df['year']), (min(df['year']), max(df['year'])))
+start_month, end_month = st.slider('Select the Month Range', 1, 12, (1, 12))
+
+# Filtering the dataframe based on the selected date range
+df = df[(df['year'] >= start_year) & (df['year'] <= end_year) & 
+        (df['month'] >= start_month) & (df['month'] <= end_month)]
+
 # Displaying the year and the first few rows of the selected dataset
 st.write(f"Selected Dataset Year: {selected_year}")
 st.write("Sample data from the selected dataset:")
@@ -125,3 +136,47 @@ for opt in plot_options:
     }
     st.subheader(title_map[opt])
     plot_categorical_distribution(df, opt, title_map[opt])
+
+
+# Map visualization using Plotly
+# Map the accident types to numeric values
+unique_accident_types = df['accident_type'].unique()
+accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
+df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
+
+
+# Create a Mapbox scatter plot with markers colored based on mapped accident type values
+fig99 = go.Figure(go.Scattermapbox(
+        lat=df['latitude'],
+        lon=df['longitude'],
+        mode='markers',
+        marker=go.scattermapbox.Marker(
+            size=5,
+            color=df['accident_type_numeric'],
+            colorscale='Jet',
+            showscale=True,
+            colorbar=dict(tickvals=list(accident_type_mapping.values()), 
+                          ticktext=list(accident_type_mapping.keys()))
+        ),
+        text=df['city'] + '<br>' + df['accident_type'],
+    ))
+
+fig99.update_layout(
+    title='Accidents in Brazil Based on Latitude and Longitude (Colored by Accident Type)',
+    autosize=True,
+    hovermode='closest',
+    showlegend=False,
+    mapbox=go.layout.Mapbox(
+        accesstoken=None,
+        bearing=0,
+        center=go.layout.mapbox.Center(
+            lat=-10,
+            lon=-55
+        ),
+        pitch=0,
+        zoom=3,
+        style='open-street-map'
+    ),
+)
+
+st.plotly_chart(fig99)
