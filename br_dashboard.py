@@ -13,7 +13,10 @@ def load_data():
 df = load_data()
 
 # Convert the 'date' column to datetime, coerce errors
-df['date'] = pd.to_datetime(df['date'], errors='coerce')
+if 'date' in df.columns:
+    df['date'] = pd.to_datetime(df['date'], errors='coerce')
+else:
+    st.error("Date column not found in the DataFrame.")
 
 # Now, extract the year and other datetime related operations
 df['year'] = df['date'].dt.year
