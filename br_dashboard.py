@@ -9,7 +9,14 @@ def load_data():
     data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='latin1')
     return data
 
+# Load the data
 df = load_data()
+
+# Convert the 'date' column to datetime, coerce errors
+df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
+# Now, extract the year and other datetime related operations
+df['year'] = df['date'].dt.year
 
 # Title of the dashboard
 st.title("Accident Data Brazil Dashboard")
