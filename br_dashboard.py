@@ -5,9 +5,17 @@ import seaborn as sns
 
 # Load the dataset
 @st.cache
-def load_data():
-    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='latin1')
+def load_data(year):
+    data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
+    # Attempt to convert the 'date' column to datetime
+    try:
+        data['date'] = pd.to_datetime(data['date'], errors='coerce')
+        if data['date'].isnull().all():
+            raise Exception("Date conversion failed.")
+    except Exception as e:
+        st.warning(f"Error processing date column: {e}. Skipping date conversion.")
     return data
+
 
 # Load the data
 df = load_data()
