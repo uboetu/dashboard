@@ -158,9 +158,6 @@ unique_accident_types = df['accident_type'].unique()
 accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
 df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
 
-# Slider for selecting the date range
-start_year, end_year = st.slider('Select the Year Range', min(df['year']), max(df['year']), (min(df['year']), max(df['year'])))
-start_month, end_month = st.slider('Select the Month Range', 1, 12, (1, 12))
 # Create a Mapbox scatter plot with markers colored based on mapped accident type values
 fig99 = go.Figure(go.Scattermapbox(
         lat=df['latitude'],
