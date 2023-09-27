@@ -58,5 +58,34 @@ st.write(f"Selected Dataset Year: {selected_year}")
 st.write("Sample data from the selected dataset:")
 st.write(df.head())
 
+# EDA Plots
+def plot_categorical_distribution(data, column, title):
+    plt.figure(figsize=(10, 6))
+    sns.countplot(y=data[column], order = data[column].value_counts().index, palette='viridis')
+    plt.title(title, fontsize=15)
+    plt.ylabel('')
+    plt.show()
 
-### EDA hier ###
+# Sidebar options for EDA
+st.sidebar.header("EDA Options")
+plot_options = st.sidebar.multiselect(
+    "Select the features to plot", 
+    ('weekday', 'accident_cause', 'accident_type', 'accident_classification', 'time_of_day', 'weather_condition', 'type_of_road', 'road_layout', 'urban_rural'), 
+    ('weekday', 'accident_cause')
+)
+
+# Plotting the selected options
+for opt in plot_options:
+    title_map = {
+        'weekday': 'Distribution of Accidents by Weekday',
+        'accident_cause': 'Distribution of Accidents by Cause',
+        'accident_type': 'Distribution of Accidents by Type',
+        'accident_classification': 'Distribution of Accidents by Classification',
+        'time_of_day': 'Distribution of Accidents by Time of the Day',
+        'weather_condition': 'Distribution of Accidents by Weather Condition',
+        'type_of_road': 'Distribution of Accidents by Type of Road',
+        'road_layout': 'Distribution of Accidents by Road Layout',
+        'urban_rural': 'Distribution of Accidents by Urban/Rural'
+    }
+    st.subheader(title_map[opt])
+    plot_categorical_distribution(df, opt, title_map[opt])
