@@ -185,3 +185,23 @@ fig99 = go.Figure(go.Scattermapbox(
         ),
         text=df_week['city'] + '<br>' + df_week['accident_type'],
     ))
+
+fig99.update_layout(
+    title='Accidents in Brazil Based on Latitude and Longitude (Colored by Accident Type)',
+    autosize=True,
+    hovermode='closest',
+    showlegend=False,
+    mapbox=go.layout.Mapbox(
+        accesstoken=None,
+        bearing=0,
+        center=go.layout.mapbox.Center(
+            lat=-10,
+            lon=-55
+        ),
+        pitch=0,
+        zoom=3,
+        style='open-street-map'
+    ),
+)
+
+st.plotly_chart(fig99)
