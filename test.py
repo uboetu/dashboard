@@ -18,18 +18,13 @@ df['week'] = df['date'].dt.strftime('%W')  # using %W to consider weeks starting
 # ...
 
 # Week Slider
-selected_week = st.slider('Select a week', 0, 52, 0)  # weeks from 0 to 52
+selected_week = st.slider('Select a week', 0, 52, 0, key='week_slider') # weeks from 0 to 52
 # Filter data for the selected week and make a copy
 df_week = df[df['week'] == str(selected_week).zfill(2)]  # ensuring two-digit week number
 
 # Title and introduction
 st.title("Brazil Traffic Data Dashboard for 2022")
 st.write("This dashboard provides insights into the traffic data of Brazil for the year 2022.")
-
-# Week Slider
-selected_week = st.slider('Select a week', 0, 52, 0)  # weeks from 0 to 52
-# Filter data for the selected week and make a copy
-df_week = df[df['week'] == str(selected_week).zfill(2)].copy()
 
 # Map visualization using Plotly
 unique_accident_types = df_week['accident_type'].unique()
