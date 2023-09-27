@@ -13,7 +13,14 @@ df = load_data().copy()
 
 # Assuming the 'date' column is in 'YYYY-MM-DD' format
 df['date'] = pd.to_datetime(df['date'])
-df['week'] = df['date'].dt.strftime('%U')
+df['week'] = df['date'].dt.strftime('%W')  # using %W to consider weeks starting from Monday
+
+# ...
+
+# Week Slider
+selected_week = st.slider('Select a week', 0, 52, 0)  # weeks from 0 to 52
+# Filter data for the selected week and make a copy
+df_week = df[df['week'] == str(selected_week).zfill(2)]  # ensuring two-digit week number
 
 # Title and introduction
 st.title("Brazil Traffic Data Dashboard for 2022")
