@@ -38,3 +38,31 @@ if analysis == "Original Dataset Info":
     
     st.write("Sample data from the original dataset:")
     st.write(df.head())
+
+dataset_paths = {
+    '2017': 'Dados_PRF_2017_translated.csv',
+    '2018': 'Dados_PRF_2018_translated.csv',
+    '2019': 'Dados_PRF_2019_translated.csv',
+    '2020': 'Dados_PRF_2020_translated.csv',
+    '2021': 'Dados_PRF_2021_translated.csv',
+    '2022': 'Dados_PRF_2022_translated.csv',
+}
+
+def load_data(year):
+    data = pd.read_csv(dataset_paths[year], delimiter=';', encoding='latin1')
+    return data
+
+# Title of the dashboard
+st.title("Accident Data Dashboard")
+
+# Selector for year
+selected_year = st.sidebar.selectbox("Choose a Year", list(dataset_paths.keys()))
+df = load_data(selected_year)
+
+# Displaying the year and the first few rows of the selected dataset
+st.write(f"Selected Dataset Year: {selected_year}")
+st.write("Sample data from the selected dataset:")
+st.write(df.head())
+
+
+### EDA hier ###
