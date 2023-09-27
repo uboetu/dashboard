@@ -158,46 +158,34 @@ unique_accident_types = df['accident_type'].unique()
 accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
 df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
 
+# Ensure the 'date' column is datetime
+df['date'] = pd.to_datetime(df['date'], errors='coerce')
+
 # Calculate the week number
-df['week_number'] = df['date'].dt.isocalendar().week  # use isocalendar().week to get the week number
+df['week_number'] = df['date'].dt.isocalendar().week
+
+# Map accident types to numeric values before filtering the dataframe
+unique_accident_types = df['accident_type'].unique()
+accident_type_mapping = {accident_type: index for index, accident_type in enumerate(unique_accident_types)}
+df['accident_type_numeric'] = df['accident_type'].map(accident_type_mapping)
 
 # Slider for selecting the week number
 selected_week = st.slider('Select the Week Number', 1, 52, 1)
 
 # Filtering the dataframe based on the selected week number
-df = df[df['week_number'] == selected_week]
+df_week = df[df['week_number'] == selected_week]
 
 fig99 = go.Figure(go.Scattermapbox(
-        lat=df['latitude'],
-        lon=df['longitude'],
+        lat=df_week['latitude'],
+        lon=df_week['longitude'],
         mode='markers',
         marker=go.scattermapbox.Marker(
             size=5,
-            color=df['accident_type_numeric'],
+            color=df_week['accident_type_numeric'],
             colorscale='Jet',
             showscale=True,
             colorbar=dict(tickvals=list(accident_type_mapping.values()), 
                           ticktext=list(accident_type_mapping.keys()))
         ),
-        text=df['city'] + '<br>' + df['accident_type'],
+        text=df_week['city'] + '<br>' + df_week['accident_type'],
     ))
-
-fig99.update_layout(
-    title='Accidents in Brazil Based on Latitude and Longitude (Colored by Accident Type)',
-    autosize=True,
-    hovermode='closest',
-    showlegend=False,
-    mapbox=go.layout.Mapbox(
-        accesstoken=None,
-        bearing=0,
-        center=go.layout.mapbox.Center(
-            lat=-10,
-            lon=-55
-        ),
-        pitch=0,
-        zoom=3,
-        style='open-street-map'
-    ),
-)
-
-st.plotly_chart(fig99)
