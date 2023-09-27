@@ -3,13 +3,13 @@ import pandas as pd
 import plotly.graph_objects as go
 
 # Load the data
-@st.cache_data(allow_output_mutation=True)  # updated to use cache_data
+@st.cache(allow_output_mutation=True)  # reverted to use st.cache
 def load_data():
     data = pd.read_csv("Dados_PRF_2022_translated.csv", delimiter=';')
     return data
 
 # Make a copy of the DataFrame to avoid modifying the cached object
-df = load_data().copy()  # using .copy()
+df = load_data().copy()
 
 # Assuming the 'date' column is in 'YYYY-MM-DD' format
 df['date'] = pd.to_datetime(df['date'])
@@ -62,4 +62,4 @@ fig99.update_layout(
     ),
 )
 
-st.plotly_chart(fig99)  # Make sure to display the plot in Streamlit
+st.plotly_chart(fig99)
