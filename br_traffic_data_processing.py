@@ -137,7 +137,23 @@ translations = {
     'Faróis desregulados': 'Misaligned headlights',
     'Modificação proibida': 'Forbidden modification',
     'Participar de racha': 'Participate in drag racing',
-    'Sinalização encoberta': 'Covered signaling'
+    'Sinalização encoberta': 'Covered signaling',
+    'Desobediência às normas de trânsito pelo pedestre': 'Disobedience to traffic rules by the pedestrian',
+    'Fenômenos da Natureza': 'Natural phenomena',
+    'Sinalização da via insuficiente ou inadequada': 'Insufficient or inadequate road signage',
+    'Falta de Atenção do Pedestre': 'Lack of pedestrian attention',
+    'Falta de Atenção à Condução': 'Lack of attention to driving',
+    'Ingestão de Álcool': 'Alcohol ingestion',
+    'Mal Súbito': 'Sudden illness',
+    'Defeito Mecânico no Veículo': 'Mechanical defect in the vehicle',
+    'Não guardar distância de segurança': 'Not keeping a safe distance',
+    'Deficiência ou não Acionamento do Sistema de Iluminação/Sinalização do Veículo': 'Deficiency or non-activation of the Vehicle Lighting/Signaling System',
+    'Desobediência às normas de trânsito pelo condutor': 'Disobedience to traffic rules by the driver',
+    'Agressão Externa': 'External aggression',
+    'Ingestão de Substâncias Psicoativas': 'Ingestion of psychoactive substances',
+    'Restrição de Visibilidade': 'Visibility restriction',
+    'Defeito na Via': 'Defect in the road'
+
 },
     "accident_type" : {
     'Colisão traseira': 'Rear collision',
@@ -155,8 +171,14 @@ translations = {
     'Derramamento de carga': 'Cargo spill',
     'Atropelamento de Pedestre': 'Pedestrian run over',
     'Eventos atípicos': 'Atypical events',
-    'Atropelamento de Animal': 'Animal run over'
-},
+    'Atropelamento de Animal': 'Animal run over',
+    'nan': 'Not applicable or unknown',
+    'Colisão com objeto estático': 'Collision with static object',
+    'Danos eventuais': 'Occasional damages',
+    'Colisão lateral': 'Side collision',
+    'Colisão com objeto em movimento': 'Collision with moving object'
+}
+,
     "accident_classification": {
         'Com Vítimas Feridas': 'With Injured Victims',
         'Com Vítimas Fatais': 'With Fatalities',
