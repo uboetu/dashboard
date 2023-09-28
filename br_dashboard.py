@@ -348,7 +348,8 @@ plt.xticks(rotation=90)
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-grouped_data = df['highway'].groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
+# Group the data
+grouped_data = df.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
 
 # Create the bar plot
 fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
