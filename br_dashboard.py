@@ -353,7 +353,6 @@ grouped_data = df['highway'].groupby(['highway', 'accident_cause_category']).siz
 # Create the bar plot
 fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
              title='Accident Causes by Highway',
-             category_orders={"highway": selected_highways},  # Setting the order of highways on x-axis
              width=1200, height=600)
 
 # Update y-axis to logarithmic scale
