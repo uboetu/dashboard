@@ -363,3 +363,22 @@ fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_categor
 
 # Display the plot in Streamlit
 st.plotly_chart(fig)
+
+accident_counts = df['accident_type'].value_counts()
+
+# Create a DataFrame for the pie chart
+df_pie = pd.DataFrame({'accident_type': accident_counts.index, 'count': accident_counts.values})
+
+# Create the pie chart
+fig = px.pie(df_pie, values='count', names='accident_type', hole=0.3, title='Accidents types for drivers to blame')
+fig.update_traces(textinfo='percent+label')
+
+# Update layout
+fig.update_layout(
+    annotations=[dict(text='Accident Type', x=0.5, y=0.5, font_size=13, showarrow=False)],
+    width=1000, 
+    height=800
+)
+
+# Show the pie chart in Streamlit
+st.plotly_chart(fig)
