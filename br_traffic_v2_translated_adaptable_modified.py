@@ -1,4 +1,3 @@
-
 def convert_coords(df):
     """
     Converts the longitude and latitude columns from string to float,
