@@ -1,1 +1,30 @@
+import streamlit as st
 
+# Titel van het dashboard
+st.title("Voorbeeld Dashboard")
+
+# Slider
+min_value = st.slider("Kies een minimumwaarde", min_value=0, max_value=100, value=20)
+max_value = st.slider("Kies een maximumwaarde", min_value=0, max_value=100, value=80)
+
+# Zorg ervoor dat de minimumwaarde niet groter is dan de maximumwaarde
+if min_value > max_value:
+    st.error("Fout: De minimumwaarde kan niet groter zijn dan de maximumwaarde.")
+else:
+    st.success(f"U heeft gekozen voor waarden tussen {min_value} en {max_value}.")
+
+# Checkbox
+checkbox_option = st.checkbox("Kies deze optie")
+if checkbox_option:
+    st.write("U heeft de optie gekozen.")
+
+# Afhankelijke Dropdown Menu’s
+opties = ['Optie A', 'Optie B', 'Optie C']
+keuze_1 = st.selectbox('Kies een optie', opties)
+if keuze_1 == 'Optie A':
+    keuze_2 = st.selectbox('Kies een suboptie', ['Suboptie A1', 'Suboptie A2'])
+elif keuze_1 == 'Optie B':
+    keuze_2 = st.selectbox('Kies een suboptie', ['Suboptie B1', 'Suboptie B2'])
+else:
+    keuze_2 = st.selectbox('Kies een suboptie', ['Suboptie C1', 'Suboptie C2'])
+st.write(f"U heeft gekozen voor {keuze_1} en {keuze_2}.")
