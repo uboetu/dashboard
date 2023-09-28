@@ -3,6 +3,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.graph_objs as go
+import plotly.express as px
+
 
 
 # Load the dataset
@@ -170,13 +172,6 @@ for i in range(0, len(columns), 3):
     if i + 2 < len(columns):
         col3.write(f"{i + 2}: `{columns[i + 2]}`")
 
-import streamlit as st
-import pandas as pd
-import plotly.express as px
-import seaborn as sns
-import matplotlib.pyplot as plt
-
-# Load your dataframe df here
 
 # Your line plot code
 df['hour'] = pd.to_datetime(df['datetime']).dt.hour
