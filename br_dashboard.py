@@ -85,7 +85,7 @@ st.markdown(
     The translation, ensuring the seamless understanding of the analysis, was executed using a specialized script. This script also automates the processing of traffic accident data, enhancing ease of analysis across various years.
     
     For a deeper insight into the translation process or to access the script, kindly refer to the following GitHub link: 
-    [Translation Script](https://github.com/uboetu/dashboard/blob/main/br_traffic_v2_translated_adaptable_modified.py)
+    [Data Processing Script](https://github.com/uboetu/dashboard/blob/main/br_traffic_data_processing.py)
     """
 )
 
@@ -262,28 +262,6 @@ with container1:
 
 with container2:
     st.plotly_chart(fig2)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Map accident types to numeric values before filtering the dataframe
 unique_accident_types = df['accident_type'].unique()
