@@ -376,8 +376,8 @@ fig.update_traces(textinfo='percent+label')
 # Update layout
 fig.update_layout(
     annotations=[dict(text='Accident Type', x=0.5, y=0.5, font_size=13, showarrow=False)],
-    width=1000, 
-    height=800
+    width=500, 
+    height=400
 )
 
 # Show the pie chart in Streamlit
