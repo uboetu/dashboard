@@ -353,8 +353,6 @@ selected_highways = [316, 116, 163, 101, 40]
 # Filter the data
 filtered_data = df[df['highway'].isin(selected_highways)]
 
-# Map accident causes to categories
-filtered_data['accident_cause_category'] = filtered_data['accident_cause'].map(cause_to_category)
 grouped_data = filtered_data.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
 
 # Create the bar plot
