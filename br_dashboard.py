@@ -348,18 +348,16 @@ plt.xticks(rotation=90)
 # Display the plot in Streamlit
 st.pyplot(fig)
 
-selected_highways = [316, 116, 163, 101, 40]
-
-# Filter the data
-filtered_data = df[df['highway'].isin(selected_highways)]
-
-grouped_data = filtered_data.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
+grouped_data = df['highway'].groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
 
 # Create the bar plot
 fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
              title='Accident Causes by Highway',
              category_orders={"highway": selected_highways},  # Setting the order of highways on x-axis
              width=1200, height=600)
+
+# Update y-axis to logarithmic scale
+fig.update_layout(yaxis_type="log")
 
 # Display the plot in Streamlit
 st.plotly_chart(fig)
