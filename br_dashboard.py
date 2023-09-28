@@ -138,7 +138,8 @@ def plot_categorical_distribution(data, column, title):
     ax.set_title(title, fontsize=15)
     ax.set_ylabel('')
     st.pyplot(fig)  # Pass the figure object to st.pyplot()
-    plt.clf()  # Clear the current figure
+    plt.close(fig)  # Close the figure
+
 
 
 # Sidebar options for EDA
