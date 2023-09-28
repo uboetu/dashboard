@@ -10,7 +10,7 @@ import plotly.express as px
 # Load the dataset
 @st.cache
 def load_data():
-    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='ISO-8859-1')
+    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='latin1')
     return data
 
 # Load the data
@@ -333,3 +333,17 @@ fig99.update_layout(
 )
 
 st.plotly_chart(fig99)
+
+agg_data = df.groupby(['state', 'accident_type']).size().unstack(fill_value=0)
+
+# Creating the plot
+fig, ax = plt.subplots(figsize=(12, 6))
+agg_data.plot(kind='bar', stacked=True, ax=ax)
+ax.set_xlabel('State')
+ax.set_ylabel('Count')
+ax.set_title('Total Count of Accident Types by State')
+ax.legend(title='Accident Type', bbox_to_anchor=(1.05, 1), loc='upper left')
+plt.xticks(rotation=90)
+
+# Display the plot in Streamlit
+st.pyplot(fig)
