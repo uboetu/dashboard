@@ -64,8 +64,9 @@ def plot_missing_values(df):
     sns.heatmap(missing_values, cbar=False, cmap='viridis')
     plt.title('Missing Values Heatmap')
     
-    # Show the plot
-    plt.show()
+    # Show the plot in Streamlit
+    st.pyplot(plt.gcf())  # Use st.pyplot() to display the plot
+
 
 # Use the function in Streamlit
 st.write("Missing Values Heatmap")
