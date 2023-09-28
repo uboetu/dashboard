@@ -89,7 +89,7 @@ st.markdown(
 
 
 # Check if the checkbox is checked
-if st.checkbox('Show Documentation'):
+if st.checkbox("Provide enhanced insight into data processing"):
     # Display the documentation in markdown format when checkbox is checked
     st.markdown("""
     # Brazilian Traffic Data Processing Script
