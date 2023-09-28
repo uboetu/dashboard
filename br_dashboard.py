@@ -55,6 +55,23 @@ for i in range(0, len(columns), 3):
 st.write("Sample data from the original dataset:")
 st.write(df.head())
 
+def plot_missing_values(df):
+    # Find missing values in the dataset
+    missing_values = df.isnull()
+    
+    # Plotting the heatmap
+    plt.figure(figsize=(10, 6))
+    sns.heatmap(missing_values, cbar=False, cmap='viridis')
+    plt.title('Missing Values Heatmap')
+    
+    # Show the plot
+    plt.show()
+
+# Use the function in Streamlit
+st.write("Missing Values Heatmap")
+plot_missing_values(df)
+
+
 dataset_paths = {
     '2017': 'Dados_PRF_2017_translated.csv',
     '2018': 'Dados_PRF_2018_translated.csv',
