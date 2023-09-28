@@ -202,14 +202,17 @@ fig2 = px.pie(accident_type_counts,
               values='count',
               title='Distribution of Accident Types')
 
-# Layout
-col1, col2 = st.beta_columns(2)
-
-with col1:
-    st.plotly_chart(fig1)
-
-with col2:
-    st.plotly_chart(fig2)
+if opt == 'time_of_day':
+    container1 = st.container()
+    container2 = st.container()
+    with container1:
+        st.subheader(title_map[opt])
+        plot_categorical_distribution(df, opt, title_map[opt])
+    with container2:
+        st.plotly_chart(fig_line)
+else:
+    st.subheader(title_map[opt])
+    plot_categorical_distribution(df, opt, title_map[opt])
 
 
 
