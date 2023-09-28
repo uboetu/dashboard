@@ -22,7 +22,7 @@ try:
     df['date'] = pd.to_datetime(df['date'], errors='coerce')
     df['year'] = df['date'].dt.year
 except KeyError:
-    st.warning("Date column not found in the DataFrame. Skipping date conversion and year extraction.")
+    pass
     
 # Title of the dashboard
 st.title("Accident Data Brazil Dashboard")
