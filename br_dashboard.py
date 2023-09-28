@@ -83,6 +83,58 @@ st.markdown(
     """
 )
 
+# Check if the checkbox is checked
+if st.checkbox('Show Documentation'):
+    # Display the documentation in markdown format when checkbox is checked
+    st.markdown("""
+    # Brazilian Traffic Data Processing Script
+
+    This script processes and translates Brazilian traffic accident data from 2017 to 2023.
+
+    ## Overview
+
+    - **Main Task**: Processes and translates traffic accident data.
+    - **Input**: CSV files named 'Dados_PRF_{year}.csv'.
+    - **Output**: New CSV files with processed and translated data, named 'Dados_PRF_{year}_translated.csv'.
+
+    ## Functions
+
+    1. **`convert_coords(df)`**:
+    - **Task**: Converts longitude and latitude from string to float.
+    - **Input**: DataFrame `df`.
+    - **Output**: Modified DataFrame.
+
+    2. **`translate_dataframe(df, translation_dict)`**:
+    - **Task**: Translates DataFrame column names.
+    - **Input**: DataFrame `df`, Translation dictionary `translation_dict`.
+    - **Output**: DataFrame with translated column names.
+
+    3. **`translate_values(df, translations)`**:
+    - **Task**: Translates specific values within DataFrame columns.
+    - **Input**: DataFrame `df`, Translations dictionary `translations`.
+    - **Output**: DataFrame with translated values.
+
+    4. **`convert_datetime(df)`**:
+    - **Task**: Converts date and time columns to datetime objects.
+    - **Input**: DataFrame `df`.
+    - **Output**: Modified DataFrame with datetime objects.
+
+    ## Workflow
+
+    - **Step 1**: Load a CSV file for each year from 2017 to 2023.
+    - **Step 2**: Remove duplicate rows from the DataFrame.
+    - **Step 3**: Use `translate_dataframe` to translate column names.
+    - **Step 4**: Use `convert_coords` to convert coordinates.
+    - **Step 5**: Use `convert_datetime` to convert date and time columns to datetime objects.
+    - **Step 6**: Use `translate_values` to translate specific values within columns.
+    - **Step 7**: Save the processed DataFrame as a new CSV file in the same directory.
+    - **Error Handling**: If a file for a specific year is not found, print a message and continue to the next year.
+
+    ## Conclusion
+
+    The script automates the processing and translation of traffic accident data, making it easier to analyze and understand the data across various years.
+    """)
+
 # Title of the dashboard
 st.title("Accident Data Brazil 2017-2022")
 
