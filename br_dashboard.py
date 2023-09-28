@@ -202,14 +202,29 @@ fig2 = px.pie(accident_type_counts,
               values='count',
               title='Distribution of Accident Types')
 
-container1 = st.container()
-container2 = st.container()
+fig1_html = fig1.to_html(full_html=False)
+fig2_html = fig2.to_html(full_html=False)
 
-with container1:
-    st.plotly_chart(fig1)
+# Using html to create side-by-side divs
+html_code = f"""
+    <div style="display: flex;">
+        <div style="flex: 50%;">
+            <iframe src="about:blank" id="fig1" style="border:none;width:100%;height:400px;"></iframe>
+        </div>
+        <div style="flex: 50%;">
+            <iframe src="about:blank" id="fig2" style="border:none;width:100%;height:400px;"></iframe>
+        </div>
+    </div>
+    <script>
+        var fig1 = document.getElementById('fig1');
+        var fig2 = document.getElementById('fig2');
+        fig1.srcdoc = `{fig1_html}`;
+        fig2.srcdoc = `{fig2_html}`;
+    </script>
+"""
 
-with container2:
-    st.plotly_chart(fig2)
+components.v1.html(html_code, width=1000, height=500, scrolling=False)
+
 
 
 
