@@ -333,7 +333,6 @@ fig99.update_layout(
 )
 
 st.plotly_chart(fig99)
-<<<<<<< HEAD
 
 agg_data = df.groupby(['state', 'accident_type']).size().unstack(fill_value=0)
 
@@ -348,5 +347,21 @@ plt.xticks(rotation=90)
 
 # Display the plot in Streamlit
 st.pyplot(fig)
-=======
->>>>>>> 78727f85af46be2ce0c050e86f55d41bac07f45e
+
+selected_highways = [316, 116, 163, 101, 40]
+
+# Filter the data
+filtered_data = df[df['highway'].isin(selected_highways)]
+
+# Map accident causes to categories
+filtered_data['accident_cause_category'] = filtered_data['accident_cause'].map(cause_to_category)
+grouped_data = filtered_data.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
+
+# Create the bar plot
+fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
+             title='Accident Causes by Highway',
+             category_orders={"highway": selected_highways},  # Setting the order of highways on x-axis
+             width=1200, height=600)
+
+# Display the plot in Streamlit
+st.plotly_chart(fig)
