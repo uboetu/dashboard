@@ -75,13 +75,18 @@ def load_data(year):
 
 st.markdown(
     """
-    ## Translation of Dataset
-    The datasets used in this dashboard were originally in Portuguese. 
-    We have translated all the data to English to make the analysis more accessible to a global audience. 
-    The translation was done using a custom script, which can be found at the following GitHub link:
+    ## Dataset Translation Details
+    To enhance global accessibility and comprehension, the datasets employed in this dashboard, originally in Portuguese, have been meticulously translated to English. 
+    This extensive translation process involved various steps including the conversion of coordinates, translation of specific column values, and the transformation of date and time fields to datetime objects. 
+    This ensures not only language translation but also the usability of the dataset for further analysis and processing.
+
+    The translation, ensuring the seamless understanding of the analysis, was executed using a specialized script. This script also automates the processing of traffic accident data, enhancing ease of analysis across various years.
+    
+    For a deeper insight into the translation process or to access the script, kindly refer to the following GitHub link: 
     [Translation Script](https://github.com/uboetu/dashboard/blob/main/br_traffic_v2_translated_adaptable_modified.py)
     """
 )
+
 
 # Check if the checkbox is checked
 if st.checkbox('Show Documentation'):
