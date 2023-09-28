@@ -333,6 +333,7 @@ fig99.update_layout(
 )
 
 st.plotly_chart(fig99)
+<<<<<<< HEAD
 
 agg_data = df.groupby(['state', 'accident_type']).size().unstack(fill_value=0)
 
@@ -347,3 +348,5 @@ plt.xticks(rotation=90)
 
 # Display the plot in Streamlit
 st.pyplot(fig)
+=======
+>>>>>>> 78727f85af46be2ce0c050e86f55d41bac07f45e
