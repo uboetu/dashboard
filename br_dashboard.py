@@ -180,6 +180,9 @@ def plot_missing_values(df):
     plt.figure(figsize=(10, 6))
     sns.heatmap(missing_values, cbar=False, cmap='viridis')
     plt.title('Missing Values Heatmap')
+
+    plt.tick_params(axis='both', which='major', labelsize=8)
+    plt.tick_params(axis='both', which='minor', labelsize=6)
     
     # Show the plot in Streamlit
     st.pyplot(plt.gcf())  # Use st.pyplot() to display the plot
