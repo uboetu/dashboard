@@ -370,7 +370,10 @@ additional_causes_mapping = {
     'Steep slope': 'Road Conditions',
     'Traffic lanes with insufficient width': 'Infrastructure Issues',
     'Urban area without a proper pedestrian crossing': 'Infrastructure Issues',
-    'Restricted visibility on vertical curves': 'Visibility restriction'
+    'Restricted visibility on vertical curves': 'Visibility restriction',
+    'Alcohol ingestion': 'Alcohol or Substance Abuse',
+    'Deficiency or non-activation of the Vehicle Lighting/Signaling System': 'Infrastructure Issues',
+    'Inefficient drainage system': 'Infrastructure Issues'
 }
 
 cause_to_category.update(additional_causes_mapping)
@@ -397,12 +400,10 @@ for year in range(2017, 2024):
         # Save translated CSV
         output_file_name = os.path.join(script_dir, "Dados_PRF_" + str(year) + "_translated.csv")
         df_translated.to_csv(output_file_name, index=False, encoding='utf-8', sep=';')
-        
+
     except FileNotFoundError:
         print("File for year " + str(year) + " not found. Skipping...")
 # Map the accident causes to categories
 df_translated['accident_cause_category'] = df_translated['accident_cause'].map(cause_to_category)
 
 # Debugging: Print out values that didn't get mapped
-unmapped_causes = df_translated[df_translated['accident_cause_category'].isna()]['accident_cause'].unique()
-print("Unmapped Causes for Year", year, ":", unmapped_causes)
