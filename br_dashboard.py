@@ -361,8 +361,5 @@ fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_categor
              title='Accident Causes by Highway (Top 10 Highways)',
              width=1200, height=600)
 
-# Update y-axis to logarithmic scale
-fig.update_layout(yaxis_type="log")
-
 # Display the plot in Streamlit
 st.plotly_chart(fig)
