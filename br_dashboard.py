@@ -359,7 +359,7 @@ grouped_data = grouped_data[grouped_data['highway'].isin(top_highways)]
 # Create the bar plot
 fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
              title='Accident Causes by Highway (Top 10 Highways)',
-             width=1200, height=600)
+             width=600, height=300)
 
 # Display the plot in Streamlit
 st.plotly_chart(fig)
