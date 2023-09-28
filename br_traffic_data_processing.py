@@ -13,8 +13,8 @@ def convert_coords(df):
 
 
 import pandas as pd
-import os
 
+import os
 script_dir = os.path.dirname(os.path.abspath(__file__))
 file_path_template = os.path.join(script_dir, 'Dados_PRF_{}.csv')
 dfs = []
@@ -98,7 +98,7 @@ translations = {
     'Desrespeitar a preferência no cruzamento': 'Disrespecting Intersection Preference',
     'Pedestre andava na pista': 'Pedestrian Walking on the Road'
 },
-    "accident_type" :{
+    "accident_type" : {
     'Colisão frontal': 'Frontal Collision',
     'Colisão traseira': 'Rear Collision',
     'Colisão lateral': 'Lateral Collision',
