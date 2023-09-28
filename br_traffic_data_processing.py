@@ -353,6 +353,27 @@ for category, causes in categorized_terms.items():
     for cause in causes:
         cause_to_category[cause] = category
 
+additional_causes_mapping = {
+    'Incompatible speed': 'Traffic Rule Violation',
+    'Excessive and/or poorly stowed cargo': 'Vehicle Issues',
+    'Sharp curve': 'Road Conditions',
+    'Braking sharply': 'Driver Error',
+    'Other road failures': 'Other Issues',
+    'Restricted visibility on horizontal curves': 'Visibility restriction',
+    'Lack of containment element preventing exit from the carriageway': 'Infrastructure Issues',
+    'Roadworks': 'Infrastructure Issues',
+    'Temporary detour': 'Infrastructure Issues',
+    'Speed bump not in accordance': 'Infrastructure Issues',
+    'Driving on the sidewalk': 'Unlawful Acts',
+    'Poorly positioned signage': 'Infrastructure Issues',
+    'Static object on the carriageway': 'Infrastructure Issues',
+    'Steep slope': 'Road Conditions',
+    'Traffic lanes with insufficient width': 'Infrastructure Issues',
+    'Urban area without a proper pedestrian crossing': 'Infrastructure Issues',
+    'Restricted visibility on vertical curves': 'Visibility restriction'
+}
+
+cause_to_category.update(additional_causes_mapping)
 
 for year in range(2017, 2024):
     file_path = file_path_template.format(year)
@@ -379,3 +400,9 @@ for year in range(2017, 2024):
         
     except FileNotFoundError:
         print("File for year " + str(year) + " not found. Skipping...")
+# Map the accident causes to categories
+df_translated['accident_cause_category'] = df_translated['accident_cause'].map(cause_to_category)
+
+# Debugging: Print out values that didn't get mapped
+unmapped_causes = df_translated[df_translated['accident_cause_category'].isna()]['accident_cause'].unique()
+print("Unmapped Causes for Year", year, ":", unmapped_causes)
