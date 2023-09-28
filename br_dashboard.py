@@ -351,8 +351,11 @@ st.pyplot(fig)
 # Group the data
 grouped_data = df.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
 
+# Summing counts for each highway and getting top 10 highways with most accidents
+top_highways = grouped_data.groupby('highway')['count'].sum().nlargest(10).index.tolist()
+
 # Create the bar plot
-fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_category',
+fig = px.bar(top_highways, x='highway', y='count', color='accident_cause_category',
              title='Accident Causes by Highway',
              width=1200, height=600)
 
