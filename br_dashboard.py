@@ -128,7 +128,7 @@ hourly_counts.columns = ['hour', 'count']
 fig_line = px.line(hourly_counts, x='hour', y='count', 
                    title='Accidents Over Time (by Hour)',
                    labels={'hour': 'Hour of the Day', 'count': 'Accident Count'},
-                   width=600, height=600)
+                   width=300, height=200)
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
@@ -202,17 +202,14 @@ fig2 = px.pie(accident_type_counts,
               values='count',
               title='Distribution of Accident Types')
 
-if opt == 'time_of_day':
-    container1 = st.container()
-    container2 = st.container()
-    with container1:
-        st.subheader(title_map[opt])
-        plot_categorical_distribution(df, opt, title_map[opt])
-    with container2:
-        st.plotly_chart(fig_line)
-else:
-    st.subheader(title_map[opt])
-    plot_categorical_distribution(df, opt, title_map[opt])
+container1 = st.container()
+container2 = st.container()
+
+with container1:
+    st.plotly_chart(fig1)
+
+with container2:
+    st.plotly_chart(fig2)
 
 
 
