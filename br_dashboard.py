@@ -164,7 +164,7 @@ for opt in plot_options:
     }
     
     if opt == 'time_of_day':
-        col1, col2 = st.beta_columns(2)
+        col1, col2 = st.columns(2)  # use st.columns() instead of st.beta_columns()
         with col1:
             st.subheader(title_map[opt])
             plot_categorical_distribution(df, opt, title_map[opt])
