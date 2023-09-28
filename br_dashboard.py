@@ -120,8 +120,6 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 # Load your dataframe df here
-st.set_page_config(layout='wide')
-
 
 # Your line plot code
 df['hour'] = pd.to_datetime(df['datetime']).dt.hour
@@ -130,7 +128,7 @@ hourly_counts.columns = ['hour', 'count']
 fig_line = px.line(hourly_counts, x='hour', y='count', 
                    title='Accidents Over Time (by Hour)',
                    labels={'hour': 'Hour of the Day', 'count': 'Accident Count'},
-                   width=300, height=300)
+                   width=600, height=600)
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
