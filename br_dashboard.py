@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit import components
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -202,10 +203,11 @@ fig2 = px.pie(accident_type_counts,
               values='count',
               title='Distribution of Accident Types')
 
+# Convert plots to HTML
 fig1_html = fig1.to_html(full_html=False)
 fig2_html = fig2.to_html(full_html=False)
 
-# Using html to create side-by-side divs
+# Insert the HTML and JavaScript code here to display the plots side by side
 html_code = f"""
     <div style="display: flex;">
         <div style="flex: 50%;">
@@ -223,7 +225,8 @@ html_code = f"""
     </script>
 """
 
-components.v1.html(html_code, width=1000, height=500, scrolling=False)
+st.components.v1.html(html_code, width=1000, height=500, scrolling=False)
+
 
 
 
