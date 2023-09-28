@@ -113,9 +113,27 @@ for i in range(0, len(columns), 3):
     if i + 2 < len(columns):
         col3.write(f"{i + 2}: `{columns[i + 2]}`")
 
+import streamlit as st
+import pandas as pd
+import plotly.express as px
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load your dataframe df here
+# df = pd.read_csv('your_data.csv')
+
+# Your line plot code
+df['hour'] = pd.to_datetime(df['datetime']).dt.hour
+hourly_counts = df['hour'].value_counts().sort_index().reset_index()
+hourly_counts.columns = ['hour', 'count']
+fig_line = px.line(hourly_counts, x='hour', y='count', 
+                   title='Accidents Over Time (by Hour)',
+                   labels={'hour': 'Hour of the Day', 'count': 'Accident Count'},
+                   width=600, height=600)
+
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
-    fig, ax = plt.subplots(figsize=(10, 6))  # Create a new figure and axis object
+    fig, ax = plt.subplots(figsize=(5, 3))  # Create a new figure and axis object
     sns.countplot(y=data[column], order=data[column].value_counts().index, palette='viridis', ax=ax)
     ax.set_title(title, fontsize=15)
     ax.set_ylabel('')
@@ -144,8 +162,18 @@ for opt in plot_options:
         'road_layout': 'Distribution of Accidents by Road Layout',
         'urban_rural': 'Distribution of Accidents by Urban/Rural'
     }
-    st.subheader(title_map[opt])
-    plot_categorical_distribution(df, opt, title_map[opt])
+    
+    if opt == 'time_of_day':
+        col1, col2 = st.beta_columns(2)
+        with col1:
+            st.subheader(title_map[opt])
+            plot_categorical_distribution(df, opt, title_map[opt])
+        with col2:
+            st.plotly_chart(fig_line)
+    else:
+        st.subheader(title_map[opt])
+        plot_categorical_distribution(df, opt, title_map[opt])
+
 
 
 # Map visualization using Plotly
@@ -159,6 +187,52 @@ df['date'] = pd.to_datetime(df['date'], errors='coerce')
 
 # Calculate the week number
 df['week_number'] = df['date'].dt.isocalendar().week
+
+
+
+grouped_data = df[['severely_injured', 'unharmed', 'unknown', 'injured']].sum().reset_index(name='count')
+fig1 = px.pie(grouped_data, values='count', names=grouped_data.columns[0], hole=0.3,
+              title='Distribution of Injury Types')
+fig1.update_traces(textinfo='percent+label')
+fig1.update_layout(annotations=[dict(text='Injury Types', x=0.5, y=0.5, font_size=13, showarrow=False)])
+
+accident_type_counts = df['accident_type'].value_counts().reset_index()
+accident_type_counts.columns = ['accident_type', 'count']
+fig2 = px.pie(accident_type_counts, 
+              names='accident_type', 
+              values='count',
+              title='Distribution of Accident Types')
+
+# Layout
+col1, col2 = st.beta_columns(2)
+
+with col1:
+    st.plotly_chart(fig1)
+
+with col2:
+    st.plotly_chart(fig2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Map accident types to numeric values before filtering the dataframe
 unique_accident_types = df['accident_type'].unique()
