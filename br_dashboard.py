@@ -10,7 +10,7 @@ import plotly.express as px
 # Load the dataset
 @st.cache
 def load_data():
-    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='latin1')
+    data = pd.read_csv('Dados_PRF_2022.csv', delimiter=';', encoding='ISO-8859-1')
     return data
 
 # Load the data
