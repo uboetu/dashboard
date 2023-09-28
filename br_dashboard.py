@@ -382,3 +382,19 @@ fig.update_layout(
 
 # Show the pie chart in Streamlit
 st.plotly_chart(fig)
+
+
+
+plt.figure(figsize=(10, 6))
+sns.countplot(x='accident_cause_category', data=df, order=df['accident_cause_category'].value_counts().index)
+
+# Update the x-axis labels and rotate them
+plt.xticks(rotation=60)
+
+# Update the labels and title to be in English
+plt.xlabel('Cause of the Accident')
+plt.ylabel('Number of Accidents')
+plt.title('Bar Chart of Accident Causes')
+
+# Display the plot in Streamlit
+st.pyplot(plt.gcf())
