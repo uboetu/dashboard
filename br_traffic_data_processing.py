@@ -233,72 +233,96 @@ translations = {
     }
 }
 
-cause_to_category = {
-    'Alcohol ingestion by the driver': 'Driver is to blame',
-    'Late or inefficient driver reaction': 'Driver is to blame',
-    'Incompatible speed': 'Driver is to blame',
-    'Driving on the wrong side of the road': 'Driver is to blame',
-    'Lane changing maneuver': 'Lane change maneuver',
-    'Water accumulation on the pavement': 'Environmental events',
-    'Animals on the Road': 'Environmental events',
-    'Slippery road': 'Environmental events',
-    'Potholed road': 'Environmental events',
-    'Sand or debris accumulation on the pavement': 'Environmental events',
-    'Road depression or wavy surface': 'Environmental events',
-    'Oil accumulation on the pavement': 'Environmental events',
-    'Lack of shoulder': 'Environmental events',
-    'Other natural phenomena': 'Environmental events',
-    'Uneven road': 'Environmental events',
-    'Steep slope': 'Environmental events',
-    'Other road failures': 'Environmental events',
-    'Shoulder at uneven level': 'Environmental events',
-    'Improper overtaking': 'Traffic maneuvers',
-    'Disregarding the right of way at an intersection': 'Traffic maneuvers',
-    'Accessing the road without noticing other vehicles': 'Traffic maneuvers',
-    'Forbidden turn': 'Traffic maneuvers',
-    'Driving on the wrong side of the road': 'Traffic maneuvers',
-    'Exit from the carriageway': 'Traffic maneuvers',
-    'Riding a motorcycle (or similar) between lanes': 'Traffic maneuvers',
-    'Braking sharply': 'Traffic maneuvers',
-    'Driving on the shoulder': 'Traffic maneuvers',
-    'Forbidden return': 'Traffic maneuvers',
-    'Parking or stopping in a prohibited area': 'Traffic maneuvers',
-    'Driving on the sidewalk': 'Traffic maneuvers',
-    'Other mechanical or electrical failures': 'Improper or failed equipment',
-    'Excessive and/or poorly stowed cargo': 'Improper or failed equipment',
-    'Braking problem': 'Improper or failed equipment',
-    'Covered signaling': 'Improper or failed equipment',
-    'Faulty traffic light': 'Improper or failed equipment',
-    'Tire damage and/or excessive wear': 'Improper or failed equipment',
-    'Poor lighting': 'Improper or failed equipment',
-    'Suspension problem': 'Improper or failed equipment',
-    'Deficient lighting/signaling system': 'Improper or failed equipment',
-    'Failure to turn on motorcycle (or similar) headlights': 'Improper or failed equipment',
-    'Forbidden modification': 'Improper or failed equipment',
-    'Speed bump not in accordance': 'Improper or failed equipment',
-    'Misaligned headlights': 'Improper or failed equipment',
-    'Inefficient drainage system': 'Improper or failed equipment',
-    'Unexpected pedestrian entry': 'Traffic situations',
-    'Pedestrian walking on the road': 'Traffic situations',
-    'Restricted visibility on vertical curves': 'Traffic situations',
-    'Restricted visibility on horizontal curves': 'Traffic situations',
-    'Irregular access': 'Traffic situations',
-    'Pedestrian crossed the road outside the crosswalk': 'Traffic situations',
-    'Lack of signage': 'Traffic situations',
-    'Sharp curve': 'Traffic situations',
-    'Obstruction on the road': 'Traffic situations',
-    'Roadworks': 'Traffic situations',
-    'Temporary detour': 'Traffic situations',
-    'Static object on the carriageway': 'Traffic situations',
-    'Pedestrian under the influence of alcohol or psychoactive substances': 'Traffic situations',
-    'Pedestrian ingesting alcohol or psychoactive substances': 'Traffic situations',
-    'Urban area without a proper pedestrian crossing': 'Traffic situations',
-    'Lack of containment element preventing exit from the carriageway': 'Traffic situations',
-    'Poorly positioned signage': 'Traffic situations',
-    'Traffic lanes with insufficient width': 'Traffic situations',
-    'Fog': 'Weather conditions',
-    'Rain': 'Weather conditions',
-    'Smoke': 'Weather conditions'
+categorized_terms = {
+    "Alcohol or Substance Abuse": [
+        'Alcohol ingestion by the driver',
+        'Driver ingesting psychoactive substances',
+        'Pedestrian under the influence of alcohol or psychoactive substances',
+        'Pedestrian ingesting alcohol or psychoactive substances',
+        'Ingestion of psychoactive substances',
+        'Ingestion of Substances Psychoactive',
+        'Ingestion of Álcohol'
+    ],
+    "Driver Error": [
+        'Driver failed to maintain distance from the front vehicle',
+        'Late or inefficient driver reaction',
+        'Lack of driver reaction',
+        'Driver sleeping',
+        'Driver using cellphone',
+        'Disobedience to traffic rules by the driver',
+        'Lack of attention to driving',
+        'Not keeping a safe distance'
+    ],
+    "Road Conditions": [
+        'Water accumulation on the pavement',
+        'Slippery road',
+        'Potholed road',
+        'Oil accumulation on the pavement',
+        'Uneven road',
+        'Road depression or wavy surface',
+        'Sand or debris accumulation on the pavement',
+    ],
+    "Vehicle Issues": [
+        'Other mechanical or electrical failures',
+        'Braking problem',
+        'Tire damage and/or excessive wear',
+        'Mechanical defect in the vehicle',
+        'Suspension problem',
+        'Failure to turn on motorcycle (or similar) headlights',
+        'Misaligned headlights'
+    ],
+    "Weather Conditions": [
+        'Rain',
+        'Fog',
+        'Smoke',
+        'Natural phenomena',
+        'Other natural phenomena'
+    ],
+    "Pedestrian-Related": [
+        'Pedestrian crossed the road outside the crosswalk',
+        'Unexpected pedestrian entry',
+        'Pedestrian walking on the road',
+        'Disobedience to traffic rules by the pedestrian',
+        'Lack of pedestrian attention'
+    ],
+    "Traffic Rule Violation": [
+        'Lane changing maneuver',
+        'Forbidden turn',
+        'Driving on the wrong side of the road',
+        'Improper overtaking',
+        'Disregarding the right of way at an intersection',
+        'Driving on the shoulder',
+        'Driver disregarded the red traffic light',
+        'Riding a motorcycle (or similar) between lanes',
+        'Participate in drag racing'
+    ],
+    "Infrastructure Issues": [
+        'Lack of signage',
+        'Shoulder at uneven level',
+        'Lack of shoulder',
+        'Deficient lighting/signaling system',
+        'Poor lighting',
+        'Insufficient or inadequate road signage',
+        'Faulty traffic light',
+        'Covered signaling'
+    ],
+    "Other Issues": [
+        "Driver's sudden illness",
+        'Sudden illness',
+        'Obstruction on the road',
+        'Animals on the road',
+        'External aggression',
+        'Visibility restriction',
+        'Defect in the road'
+    ],
+    "Unlawful Acts": [
+        'Accessing the road without noticing other vehicles',
+        'Parking or stopping in a prohibited area',
+        'Irregular access',
+        'Forbidden return',
+        'Transit on the sidewalk',
+        'Forbidden modification'
+    ]
 }
 
 def translate_dataframe(df, translation_dict):
@@ -323,6 +347,12 @@ def convert_datetime(df):
         df['datetime'] = pd.to_datetime(df['date'].astype(str) + ' ' + df['time'], errors='coerce')
         df = df.drop(columns=['time'])  # dropping the 'time' column after creating 'datetime'
     return df
+
+cause_to_category = {}
+for category, causes in categorized_terms.items():
+    for cause in causes:
+        cause_to_category[cause] = category
+
 
 for year in range(2017, 2024):
     file_path = file_path_template.format(year)
