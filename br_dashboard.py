@@ -128,7 +128,7 @@ hourly_counts.columns = ['hour', 'count']
 fig_line = px.line(hourly_counts, x='hour', y='count', 
                    title='Accidents Over Time (by Hour)',
                    labels={'hour': 'Hour of the Day', 'count': 'Accident Count'},
-                   width=300, height=200)
+                   width=400, height=300)
 
 # EDA Plots
 def plot_categorical_distribution(data, column, title):
