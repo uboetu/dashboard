@@ -192,6 +192,10 @@ for i in range(0, len(columns), 3):
 
 
 st.write("Missing Values Heatmap")
+st.markdown(
+"""
+The heatmap below gives a clear view of the missing data inside the dataset. As we can see there are only a couple missing in the ‘highway’ and ‘kilometer’ column, which are colored yellow in the heatmap.
+""")
 plot_missing_values(df)
 
 
@@ -278,6 +282,10 @@ fig2 = px.pie(accident_type_counts,
 
 container1 = st.container()
 container2 = st.container()
+st.markdown(
+"""
+The pie chart below shows that most drivers come out unharmed and only a small percentage are severely injured.
+""")   
 
 with container1:
     st.plotly_chart(fig1)
@@ -332,6 +340,11 @@ fig99.update_layout(
     ),
 )
 
+st.markdown(
+"""
+The map below gives a clear insight into where accidents occur in Brazil. With the slider above you can change the week its shows on the map. 
+The different accident types each have a different color that can be found in the legend.
+""")   
 st.plotly_chart(fig99)
 
 agg_data = df.groupby(['state', 'accident_type']).size().unstack(fill_value=0)
@@ -346,6 +359,11 @@ ax.legend(title='Accident Type', bbox_to_anchor=(1.05, 1), loc='upper left')
 plt.xticks(rotation=90)
 
 # Display the plot in Streamlit
+st.markdown(
+"""
+In the bar chart below we can see the amount of accidents per state in Brazil, we can also see the types of accidents and how often the occur per state. 
+It is clear to see that the state Minas Gerais (MG) is the state with the most accidents. Following this state are Parana (PR) and Santa Catarina (SC), All three of these states are in the bottom right part of the country.
+""")   
 st.pyplot(fig)
 
 grouped_data = df.groupby(['highway', 'accident_cause_category']).size().reset_index(name='count')
@@ -361,7 +379,13 @@ fig = px.bar(grouped_data, x='highway', y='count', color='accident_cause_categor
              title='Accident Causes by Highway (Top 10 Highways)',
              width=900, height=450)
 
+
 # Display the plot in Streamlit
+st.markdown(
+"""
+In the bar chart below we can find the count of accidents and the types of accidents for the ten highways with the most accidents.
+In Brazil the highways are named with numbers. For example, we can see that highway 101 has the most accidents with ‘Driver error’ as the most common accident type.
+""") 
 st.plotly_chart(fig)
 
 accident_counts = df['accident_type'].value_counts()
@@ -379,7 +403,10 @@ fig.update_layout(
     width=750, 
     height=600
 )
-
+st.markdown(
+"""
+This pie charts shows the accidents types for only drivers to blame, which was the main cause of the accident types. This chart is a combination of the ‘Distribution of accident Types’ and ‘Distribution of accidents by cause’ combined focused on only drivers to blame. 
+""")   
 # Show the pie chart in Streamlit
 st.plotly_chart(fig)
 
@@ -396,5 +423,9 @@ plt.xlabel('Cause of the Accident')
 plt.ylabel('Number of Accidents')
 plt.title('Bar Chart of Accident Causes')
 
+st.markdown(
+"""
+This pie charts shows the accidents types for only drivers to blame, which was the main cause of the accident types. This chart is a combination of the ‘Distribution of accident Types’ and ‘Distribution of accidents by cause’ combined focused on only drivers to blame.
+""")  
 # Display the plot in Streamlit
 st.pyplot(plt.gcf())
